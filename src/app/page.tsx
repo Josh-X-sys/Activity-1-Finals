@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { databases, account, ID } from "./lib/appwrite";
 import { Query } from "appwrite";
+import { Source_Sans_3 } from "next/font/google";
 
 export default function Page() {
   const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
@@ -51,6 +52,20 @@ export default function Page() {
       setError("");
     } catch (e: any) {
       setError(e.message ?? "Login failed");
+    }
+  }
+
+  async function loginwithAuth0(){
+    try{
+      await account.createOAuth2Session({
+        provider: "auth0",
+        success: `${process.env.NEXT_PUBLIC_APP_URL}`,
+        failure: `${process.env.NEXT_PUBLIC_APP_URL}`,
+        scopes : ["openid", "profile", "email"]
+      });
+    }
+    catch(e: any){
+      setError(e.message ?? "Auth0 0 Login Failed")
     }
   }
 
@@ -156,8 +171,8 @@ export default function Page() {
           <button className="btn btn-primary" onClick={login}>
             Login
           </button>
-          <button className="btn btn-secondary" onClick={register}>
-            Register
+          <button className="btn btn-dark" onClick={loginwithAuth0}>
+            Login with Auth0
           </button>
         </div>
         <p>
