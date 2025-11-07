@@ -229,10 +229,24 @@ export default function Page() {
             Login with Auth0
           </button>
         </div>
-        <p>
-          Email : test@gmail.com <br />
-          Password : password
-        </p>
+        <table className="border-collapse mt-5 w-1/2 mx-auto">
+          <thead>
+            <tr>
+              <th className="border border-black px-4 py-2 text-left">Email</th>
+              <th className="border border-black px-4 py-2 text-left">Password</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="border border-black px-4 py-2">editor@example.com</td>
+              <td className="border border-black px-4 py-2">editorpw</td>
+            </tr>
+            <tr>
+              <td className="border border-black px-4 py-2">viewer@example.com</td>
+              <td className="border border-black px-4 py-2">viewerpw</td>
+            </tr>
+          </tbody>
+        </table>
         {error && <p className="text-danger mt-3">{error}</p>}
       </main>
     );
